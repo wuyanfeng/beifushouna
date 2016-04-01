@@ -13,6 +13,8 @@ static Uart_Send_Data_Struct txGlobalData2;
 OS_EVENT *UART1Mbox;
 OS_EVENT *UART2Mbox;
 
+OS_FLAG_GRP *Uart_Flags;
+
 /*******************************************************************************
 * 函数名  : USART_SendData
 * 描述    : USART1初始化函数
@@ -164,7 +166,7 @@ void USARTx_SendData(USART_TypeDef *channel,Uart_Send_Data_Struct *temp)
 void USART1_IRQHandler(void)                	
 {
 	INT8U Res=0;
-	//INT8U err;
+	INT8U err;
 
 	OSIntEnter();
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) //接收中断
@@ -225,6 +227,7 @@ void USART1_IRQHandler(void)
 		}
 		else
 		{
+			OSFlagPost(Uart_Flags,USART1_T_FLAG,OS_FLAG_SET,&err);//置位发送完成标志
 			txGlobalData1.dataLen = 0;
 			Usart1_T_Count = 0;
 		//	USART_ITConfig(USART1, USART_IT_TC, DISABLE);			//使能串口1发送完成中断
@@ -242,7 +245,7 @@ void USART1_IRQHandler(void)
 void USART2_IRQHandler(void)                	
 {
 	INT8U Res=0;
-	//INT8U err;
+	INT8U err;
 
 	OSIntEnter();
 	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET) //接收中断
@@ -303,6 +306,7 @@ void USART2_IRQHandler(void)
 		}
 		else
 		{
+			OSFlagPost(Uart_Flags,USART2_T_FLAG,OS_FLAG_SET,&err);//置位发送完成标志
 			txGlobalData2.dataLen = 0;
 			Usart2_T_Count = 0;
 		//	USART_ITConfig(USART1, USART_IT_TC, DISABLE);			//使能串口1发送完成中断

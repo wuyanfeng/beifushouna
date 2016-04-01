@@ -118,6 +118,7 @@ void TASK_Start(void *p_arg)
 	(void)p_arg;
 
 	Sys_Flags = OSFlagCreate(0,&err);
+	Uart_Flags = OSFlagCreate(0,&err);
 	Limit_Flags = OSFlagCreate(0,&err);
 	UART1Mbox = OSMboxCreate((void*)0);
 	UART2Mbox = OSMboxCreate((void*)0);

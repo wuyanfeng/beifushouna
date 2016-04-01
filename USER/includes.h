@@ -10,6 +10,7 @@
 #include "recover.h"
 #include "uart.h"
 #include "comm.h"
+#include "wirlessUart.h"
 
 
 #endif

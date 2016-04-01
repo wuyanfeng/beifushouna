@@ -19,8 +19,14 @@
 #define USART2_ADDR_1		  0X30
 #define USART2_ADDR_2		  0X31
 
+#define USART1_R_FLAG		 (OS_FLAGS)1
+#define USART1_T_FLAG		 (OS_FLAGS)2
+#define USART2_R_FLAG		 (OS_FLAGS)4
+#define USART2_T_FLAG		 (OS_FLAGS)8
+
 extern OS_EVENT *UART1Mbox;//接收到数据邮箱
 extern OS_EVENT *UART2Mbox;//接收到数据邮箱
+extern OS_FLAG_GRP *Uart_Flags;//串口标志
 
 typedef struct{
 	INT8U dataLen;

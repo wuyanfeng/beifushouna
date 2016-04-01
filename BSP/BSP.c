@@ -37,4 +37,6 @@ void BSP_Init(void)
 	In_GPIO_Init();
 	UART1_Init(UART1_BAUD);
 	UART2_Init(UART2_BAUD);
+
+	WirlessModeSet(Normal);
 }
